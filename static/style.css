@@ -1,0 +1,179 @@
+h1, h2, h3, div, p {
+    margin: 0;
+}
+
+/* Общий блок вывода */
+.container {
+    margin-left: 10vw;
+    width: 660px;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial;
+    color: #e6f0f5;
+}
+h1 {
+    color: #3880b0;
+    margin: 3vw 0 1vw 10vw;
+   }
+
+/* Блок с погодой сейчас, сегодня, завтра */
+.addit-cards {
+    width: 100%;
+    height:30%;
+    display: flex;
+    background-color: white;
+    align-content: flex-start;
+}
+
+.w_now, .w_today, .w_tomorrow {
+    display: flex;
+    align-items: stretch;
+    padding: 1%;
+    margin: 0.3em;
+    width: 32%;
+    border: 1px solid #009B95;
+    background-color: #009B95;
+    border-radius: 12px;
+    box-sizing: content-box;
+    overflow: hidden;
+    transition-duration: 150ms;
+    transition-property: transform;
+}
+
+.w_now:hover, .w_today:hover, .w_tomorrow:hover {
+    color: white;
+    outline: 1px solid #009B95;
+    transform: scale(1.05);
+}
+
+.w_left p{
+    text-align: left;
+}
+.w_right{
+    width: 40%;
+    align-self: center;
+
+}
+.w_right p {
+    text-align: right;
+    font-size: 0.75em;
+
+}
+    /* Настройка текста внутри левого блока */
+
+.w_left p:nth-child(1){
+   font-size: 1em;
+   margin-bottom: 0.4em;
+}
+.w_left p:nth-child(2){
+   font-size: 1.4em;
+}
+.w_left p:last-child {
+    font-size: 0.8em;
+}
+
+/* Основной блок погоды на сегодня */
+.main-card {
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    background-color: #3f93c6;
+    border: 5px solid white;
+    border-radius: 10px;
+}
+
+.main-card h2, p{
+    text-align: center;
+}
+.main-card h2:first-child{
+    font-size: 2em;
+}
+
+.temperature {
+    font-size: 5em;
+    margin: 3%;
+}
+
+.main-card p {
+    margin: 0.2em;
+}
+
+/* Блок дополнительной информации о погоде  */
+.add-info {
+    margin-top: 2%;
+    padding: 5%;
+    display: flex;
+    justify-content: space-evenly;
+    border-top: 2px solid white;
+
+}
+.add-info span {
+    font-size: 2em;
+}
+.add-info div{
+    flex-grow: 1;
+}
+
+
+/* медиазапросы
+@media (min-width: 800px) {
+    .container {
+        max-width: 600px;
+        max-height: 400px;
+        background: 1px solid black;
+    }
+}*/
+
+/* Поле поиска  */
+form {
+  position: relative;
+  width: 650px;
+  margin: 0 auto;
+}
+.d1 {background: #009B95;
+    width: 650px;
+    margin-left: 9vw;
+    position: relative;}
+
+.d1 input:focus {
+    background-color: #f2e9d0;
+}
+.d1 input {
+  width: 100%;
+  height: 42px;
+  padding-left: 10px;
+  border: 2px solid #009B95;
+  border-radius: 5px;
+  outline: none;
+  background: #F9F0DA;
+  color: #9E9C9C;
+}
+.d1 button {
+  position: absolute;
+  top: 0;
+  right: -15px;
+  width: 42px;
+  height: 100%;
+  border: none;
+  background: #009B95;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+.d1 button:before {
+  content: "\f002";
+  font-family: FontAwesome;
+  font-size: 16px;
+  color: #F9F0DA;
+
+}
+
+/* Подсказки поиска  */
+.search-container {
+    overflow: hidden auto;
+    position: absolute;
+    top: 100%;
+    z-index: 100;
+    min-width: 480px;
+
+}

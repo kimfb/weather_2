@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" href="{{ url_for('static', filename='style.css')}}" rel="stylesheet" />
+    <title>Прогноз погоды</title>
+</head>
+<body>
+
+    <div class="d1">
+      <form action="{{url_for('index')}}" method="post" class="form-search">
+          <input type="text" placeholder="Искать здесь..." name="location" required>
+          <button type="submit" value="\f002"></button>
+      </form>
+        <div class="search-container" id="suggestions">
+            <div class="search-list">
+                {% if hints %}
+                    {% for hint in hints  %}
+                        <a href="#">{{ hint['name'], hint['country']}}</a>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <h1>{{loc[1]}}, {{loc[0]}}</h1>
+
+    <div class="container">
+        <div class="addit-cards">
+            <div class="w_now">
+                <div class="w_left">
+                    <p>Сейчас</p>
+                    <p>{{input_temperature(cur_meteo['temperature_2m'])}}</p>
+                    <p>Ощущается как {{input_temperature(cur_meteo['apparent_temperature'])}}</p>
+                </div>
+                <div class="w_right">
+                    <p>{{output_cloudy(cur_meteo['cloud_cover'])}}</p>
+                    <p>{{output_precipitation(cur_meteo['rain'], cur_meteo['snowfall'])}}</p>
+                </div>
+            </div>
+            <div class="w_today">
+                <div class="w_left">
+                    <p>{{output_date(tod_meteo['time'])}}</p>
+                    <p>
+                    <p>Днем: {{input_temperature(tod_meteo['temperature_2m'].max())}}</p>
+                    <p>Ночью: {{input_temperature(tod_meteo['temperature_2m'].min())}}</p>
+                </div>
+                <div class="w_right">
+                    <p>{{output_cloudy(tod_meteo['cloud_cover'].mean())}},</p>
+                    <p>{{output_precipitation(tod_meteo['rain'].max(), tod_meteo['snowfall'].max())}}</p>
+                </div>
+            </div>
+            <div class="w_tomorrow">
+                <div class="w_left">
+                    <p>{{output_date(tom_meteo['time'])}}</p>
+                    <p>
+                    <p>Днем: {{input_temperature(tom_meteo['temperature_2m'].max())}}</p>
+                    <p>Ночью: {{input_temperature(tom_meteo['temperature_2m'].min())}}</p>
+                </div>
+                <div class="w_right">
+                    <p>{{output_cloudy(tom_meteo['cloud_cover'].mean())}},</p>
+                    <p>{{output_precipitation(tom_meteo['rain'].max(), tom_meteo['snowfall'].max())}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="main-card">
+            <h2>Сейчас</h2>
+            <h2 class="temperature">{{input_temperature(cur_meteo['temperature_2m']) }}</h2>
+            <p>Ощущается как {{input_temperature(cur_meteo['apparent_temperature'])}} </p>
+            <p>{{output_cloudy(cur_meteo['cloud_cover'])}}, {{output_precipitation(cur_meteo['rain'], cur_meteo['snowfall'])}}</p>
+            <div class="add-info">
+                <div class="wind">
+                    <p>Ветер</p>
+                    <p><span>{{cur_meteo['wind_speed_10m']}}</span> м/c</p>
+                </div>
+                <div class="pressure">
+                    <p>Давление</p>
+                    <p><span>{{(cur_meteo['pressure_msl']*0.75)|round}}</span> мм.рт.ст.</p>
+                </div>
+                <div class="humidity">
+                    <p>Влажность</p>
+                    <p><span>{{cur_meteo['relative_humidity_2m']}}</span> %</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        let input = document.getElementsByName("location")[0];
+        input.addEventListener("input", () => {
+            var rqst = {"data": input.value,
+                         "type": "search"};
+            console.log("Данные:", rqst);
+            send_data(rqst);
+            });
+
+        async function send_data(rqst) {
+            let response = await fetch("/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json;charset=utf-8",
+                    },
+                    body: JSON.stringify(rqst)
+                });
+<!--                let result = await response.json()-->
+                console.log(response);
+
+    }
+
+
+    </script>
+
+
+</body>
+</html>
