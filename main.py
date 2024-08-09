@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, g, flash, abort, redirect, url_for, make_response
-from SupportInput import input_temperature, output_cloudy, output_precipitation, output_date
-from MeteoData import MeteoData
+from MeteoData import MeteoData, MeteoOutput
 
 DEBUG = True
 SECRET_KEY = 'fdgfh78@#5?>ggfd689(dx,v06k'
@@ -9,13 +8,9 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 
 meteo = MeteoData('Москва')
+format_output = MeteoOutput()
 
-# Добавление функций для использования их в шаблонах
-app.jinja_env.globals.update(input_temperature=input_temperature,
-                             output_cloudy=output_cloudy,
-                             output_precipitation=output_precipitation,
-                             output_date=output_date)
-# # app.jinja_env.filters['input_temperature'] = input_temperature
+
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
@@ -29,14 +24,14 @@ def index():
         print(request.headers)
         meteo = MeteoData(request.form['location'])
 
-    cur_meteo = meteo.get_meteo_data('current')
-    tod_meteo = meteo.get_meteo_data('today')
-    tom_meteo = meteo.get_meteo_data('tomorrow')
+    # cur_meteo = meteo.get_meteo_data('current')
+    # tod_meteo = meteo.get_meteo_data('today')
+    # tom_meteo = meteo.get_meteo_data('tomorrow')
+    meteo_data = meteo.get_meteo_data()
 
-    return render_template('index.html', cur_meteo=cur_meteo,
-                                         tod_meteo=tod_meteo,
-                                         tom_meteo=tom_meteo,
+    return render_template('index.html', meteo_data=meteo_data,
                                          hints=meteo.get_hints(words),
+                                         format_output=format_output,
                                          loc=meteo.get_location_data())
 
 

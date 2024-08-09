@@ -30,56 +30,56 @@
             <div class="w_now">
                 <div class="w_left">
                     <p>Сейчас</p>
-                    <p>{{input_temperature(cur_meteo['temperature_2m'])}}</p>
-                    <p>Ощущается как {{input_temperature(cur_meteo['apparent_temperature'])}}</p>
+                    <p>{{format_output.convert_temperature(meteo_data["current"]['temperature_2m'])}}</p>
+                    <p>Ощущается как {{format_output.convert_temperature(meteo_data["current"]['apparent_temperature'])}}</p>
                 </div>
                 <div class="w_right">
-                    <p>{{output_cloudy(cur_meteo['cloud_cover'])}}</p>
-                    <p>{{output_precipitation(cur_meteo['rain'], cur_meteo['snowfall'])}}</p>
+                    <p>{{format_output.convert_cloud(meteo_data["current"]['cloud_cover'])}}</p>
+                    <p>{{format_output.convert_preciption(meteo_data["current"]['rain'], meteo_data["current"]['snowfall'])}}</p>
                 </div>
             </div>
             <div class="w_today">
                 <div class="w_left">
-                    <p>{{output_date(tod_meteo['time'])}}</p>
+                    <p>{{format_output.convert_date(meteo_data["today"]['time'])}}</p>
                     <p>
-                    <p>Днем: {{input_temperature(tod_meteo['temperature_2m'].max())}}</p>
-                    <p>Ночью: {{input_temperature(tod_meteo['temperature_2m'].min())}}</p>
+                    <p>Днем: {{format_output.convert_temperature(meteo_data["today"]['temperature_2m'].max())}}</p>
+                    <p>Ночью: {{format_output.convert_temperature(meteo_data["today"]['temperature_2m'].min())}}</p>
                 </div>
                 <div class="w_right">
-                    <p>{{output_cloudy(tod_meteo['cloud_cover'].mean())}},</p>
-                    <p>{{output_precipitation(tod_meteo['rain'].max(), tod_meteo['snowfall'].max())}}</p>
+                    <p>{{format_output.convert_cloud(meteo_data["today"]['cloud_cover'].mean())}},</p>
+                    <p>{{format_output.convert_preciption(meteo_data["today"]['rain'].max(), meteo_data["today"]['snowfall'].max())}}</p>
                 </div>
             </div>
             <div class="w_tomorrow">
                 <div class="w_left">
-                    <p>{{output_date(tom_meteo['time'])}}</p>
+                    <p>{{format_output.convert_date(meteo_data["tomorrow"]['time'])}}</p>
                     <p>
-                    <p>Днем: {{input_temperature(tom_meteo['temperature_2m'].max())}}</p>
-                    <p>Ночью: {{input_temperature(tom_meteo['temperature_2m'].min())}}</p>
+                    <p>Днем: {{format_output.convert_temperature(meteo_data["tomorrow"]['temperature_2m'].max())}}</p>
+                    <p>Ночью: {{format_output.convert_temperature(meteo_data["tomorrow"]['temperature_2m'].min())}}</p>
                 </div>
                 <div class="w_right">
-                    <p>{{output_cloudy(tom_meteo['cloud_cover'].mean())}},</p>
-                    <p>{{output_precipitation(tom_meteo['rain'].max(), tom_meteo['snowfall'].max())}}</p>
+                    <p>{{format_output.convert_cloud(meteo_data["tomorrow"]['cloud_cover'].mean())}},</p>
+                    <p>{{format_output.convert_preciption(meteo_data["tomorrow"]['rain'].max(), meteo_data["tomorrow"]['snowfall'].max())}}</p>
                 </div>
             </div>
         </div>
         <div class="main-card">
             <h2>Сейчас</h2>
-            <h2 class="temperature">{{input_temperature(cur_meteo['temperature_2m']) }}</h2>
-            <p>Ощущается как {{input_temperature(cur_meteo['apparent_temperature'])}} </p>
-            <p>{{output_cloudy(cur_meteo['cloud_cover'])}}, {{output_precipitation(cur_meteo['rain'], cur_meteo['snowfall'])}}</p>
+            <h2 class="temperature">{{format_output.convert_temperature(meteo_data["current"]['temperature_2m']) }}</h2>
+            <p>Ощущается как {{format_output.convert_temperature(meteo_data["current"]['apparent_temperature'])}} </p>
+            <p>{{format_output.convert_cloud(meteo_data["current"]['cloud_cover'])}}, {{format_output.convert_preciption(meteo_data["current"]['rain'], meteo_data["current"]['snowfall'])}}</p>
             <div class="add-info">
                 <div class="wind">
                     <p>Ветер</p>
-                    <p><span>{{cur_meteo['wind_speed_10m']}}</span> м/c</p>
+                    <p><span>{{meteo_data["current"]['wind_speed_10m']}}</span> м/c</p>
                 </div>
                 <div class="pressure">
                     <p>Давление</p>
-                    <p><span>{{(cur_meteo['pressure_msl']*0.75)|round}}</span> мм.рт.ст.</p>
+                    <p><span>{{(meteo_data["current"]['pressure_msl']*0.75)|round}}</span> мм.рт.ст.</p>
                 </div>
                 <div class="humidity">
                     <p>Влажность</p>
-                    <p><span>{{cur_meteo['relative_humidity_2m']}}</span> %</p>
+                    <p><span>{{meteo_data["current"]['relative_humidity_2m']}}</span> %</p>
                 </div>
             </div>
         </div>
