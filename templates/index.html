@@ -6,7 +6,7 @@
     <title>Прогноз погоды</title>
 </head>
 <body>
-
+    <p id="out"></p>
     <div class="d1">
       <form action="{{url_for('index')}}" method="post" class="form-search">
           <input type="text" placeholder="Искать здесь..." name="location" required>
@@ -93,20 +93,43 @@
                          "type": "search"};
             console.log("Данные:", rqst);
             send_data(rqst);
-            });
+        });
 
         async function send_data(rqst) {
-            let response = await fetch("/", {
+            let response = await fetch("/search", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json;charset=utf-8",
                     },
                     body: JSON.stringify(rqst)
-                });
-<!--                let result = await response.json()-->
-                console.log(response);
+            });
+            if (response.ok) {
+                let result = await response.json(); // Обработка JSON-ответа
+                console.log(result);
+                document.getElementById('out').innerHTML = JSON.stringify(result, null, 2); // Отображение данных на странице
+            } else {
+                console.error('Ошибка при отправке данных:', response.status);
+            }
+        }
+        async function getText() {
+            const response = await fetch("/search", {
+                method: "GET", // Получаем данные с сервера
+                headers: {
+                    "Content-Type": "application/json;charset=utf-8",
+            }
+        });
 
+        // Проверка успешности запроса
+        if (response.ok) {
+            const responseText = await response.json(); // Используем response.json() для парсинга JSON
+            console.log(responseText);
+            document.getElementById('out').innerHTML = JSON.stringify(responseText, null, 2); // Отображение данных
+        } else {
+            console.error('Ошибка при получении данных:', response.status);
+        }
     }
+
+        getText();
 
 
     </script>

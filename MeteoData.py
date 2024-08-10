@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 from datetime import datetime, timedelta
+from pprint import pprint
 
 
 class MeteoData:
@@ -28,12 +29,16 @@ class MeteoData:
 
     def get_hints(self, data, lang='ru'):
         """Возвращает список подсказок для строки ввода."""
+        ans = dict()
         params = {
             'name': data,
             'language': lang
         }
         res = requests.get(self.__geo_url, params=params).json()
-        return False if not res.get('results') else res['results']
+        if res.get('results'):
+            for val in res['results']:
+                ans[val['name']] = val['country']
+        return ans
 
     def get_meteo_request(self):
         """Получим ответ от open-meteo и переведём в pandas."""

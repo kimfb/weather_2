@@ -1,0 +1,37 @@
+[33mcommit 6b04dac1577f3595ae0fed1c71d0667a9a8be5ba[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: kimfi <my_mail@mail.com>
+Date:   Sat Aug 10 05:13:26 2024 +0300
+
+    Исправления ошибок поиска
+
+[33mcommit ab5c8f9d18b8afe40b9cee8a4d160a4166de6140[m
+Author: kimfi <my_mail@mail.com>
+Date:   Sat Aug 10 02:45:25 2024 +0300
+
+    Новый класс вместо модуля Support; изменение класса MeteoData
+
+[33mcommit a562b3dfc9a02c612c46c1256ddfa52cff19c8a0[m
+Merge: 3f861fc fd4a932
+Author: kimfi <my_mail@mail.com>
+Date:   Fri Aug 9 09:56:02 2024 +0300
+
+    Merge branch 'main' of github.com:kimfb/weather_2
+    message
+
+[33mcommit 3f861fc56f93bd71d66605c0887db09dcae28dae[m
+Author: kimfi <my_mail@mail.com>
+Date:   Fri Aug 9 08:57:52 2024 +0300
+
+    Первый залив
+
+[33mcommit 21e7af512ee1496ab4691bf8ac78b5eba0ff3fdf[m
+Author: kimfi <my_mail@mail.com>
+Date:   Fri Aug 9 06:01:53 2024 +0300
+
+    Перенос в хаб
+
+[33mcommit fd4a932c482cd04bba18ad1ccea7a39b8db233c4[m
+Author: kimfb <107132931+kimfb@users.noreply.github.com>
+Date:   Fri Aug 9 05:33:05 2024 +0300
+
+    Initial commit
