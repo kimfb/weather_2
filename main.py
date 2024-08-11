@@ -18,11 +18,9 @@ def index():
         if request.form['location']:
             meteo = MeteoData(request.form['location'])
 
-
     meteo_data = meteo.get_meteo_data()
     return render_template('index.html',
                            meteo_data=meteo_data,
-                           hints=None, #meteo.get_hints(words),
                            format_output=format_output,
                            loc=meteo.get_location_data())
 
@@ -30,8 +28,6 @@ def index():
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     hints = meteo.get_hints(request.json['data'])
-    # if hints:
-    #     print(hints)
     return jsonify(hints)
 
 

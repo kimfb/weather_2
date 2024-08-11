@@ -16,6 +16,7 @@ class MeteoData:
 
     def set_location_data(self, req, lang='ru'):
         """Возвращает координаты запрашиваемого населённого пункта."""
+        req = req[:req.find(',')] if req.count(',') else req
         params = {
             'name': req,
             'language': lang
