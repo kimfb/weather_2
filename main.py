@@ -35,6 +35,11 @@ def search():
     return jsonify(hints)
 
 
+@app.route('/test_input')
+def test_input():
+    return render_template('test_input.html')
+
+
 if __name__ == "__main__":
     app.run(debug=True)
     # app.run(host='0.0.0.0', port=4998)

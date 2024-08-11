@@ -6,21 +6,13 @@
     <title>Прогноз погоды</title>
 </head>
 <body>
-    <p id="out"></p>
     <div class="d1">
       <form action="{{url_for('index')}}" method="post" class="form-search">
-          <input type="text" placeholder="Искать здесь..." name="location" required>
+          <input type="text" placeholder="Искать здесь..." name="location" autocomplete="off" required>
           <button type="submit" value="\f002"></button>
+          <div id="suggest">
+          </div>
       </form>
-        <div class="search-container" id="suggestions">
-            <div class="search-list">
-                {% if hints %}
-                    {% for hint in hints  %}
-                        <a href="#">{{ hint['name'], hint['country']}}</a>
-                    {% endfor %}
-                {% endif %}
-            </div>
-        </div>
     </div>
 
     <h1>{{loc[1]}}, {{loc[0]}}</h1>
@@ -86,15 +78,9 @@
     </div>
 
     <script>
+        let response;
 
-        let input = document.getElementsByName("location")[0];
-        input.addEventListener("input", () => {
-            var rqst = {"data": input.value,
-                         "type": "search"};
-            console.log("Данные:", rqst);
-            send_data(rqst);
-        });
-
+        // Первый fetch для отправки
         async function send_data(rqst) {
             let response = await fetch("/search", {
                     method: "POST",
@@ -105,31 +91,55 @@
             });
             if (response.ok) {
                 let result = await response.json(); // Обработка JSON-ответа
-                console.log(result);
-                document.getElementById('out').innerHTML = JSON.stringify(result, null, 2); // Отображение данных на странице
+                return result;
             } else {
                 console.error('Ошибка при отправке данных:', response.status);
             }
-        }
-        async function getText() {
-            const response = await fetch("/search", {
-                method: "GET", // Получаем данные с сервера
-                headers: {
-                    "Content-Type": "application/json;charset=utf-8",
+        };
+        const dt = document.getElementById('suggest');
+        const input = document.getElementsByName('location')[0];
+
+       // Слушает input и отправляет данные на сервер
+        input.addEventListener("input", async () => {
+            var rqst = {
+                "data": input.value,
+                "type": "search"
+            };
+
+            response = await send_data(rqst);
+
+            if (response) {
+                dt.style.display = 'block';
+                // Очищаем предыдущие подсказки
+                dt.innerHTML = '';
+
+                // Добавляем подсказки из объекта response в формате "ключ, значение"
+
+                for (const [key, value] of Object.entries(response)) {
+                    const option = document.createElement('p');
+                    option.className = 'spoint';
+                    option.innerHTML = `${key}, ${value}`;
+                    dt.appendChild(option);
+                    console.log(`${key}, ${value}`);
+                }
+                dt.style.border = '2px solid #009B95';
+
+                Array.from(document.getElementsByClassName('spoint')).forEach(function(point) {
+                    point.addEventListener('click', function() {
+                        input.value = point.innerHTML;
+                        document.querySelector('.form-search').submit();
+                    });
+                });
             }
         });
 
-        // Проверка успешности запроса
-        if (response.ok) {
-            const responseText = await response.json(); // Используем response.json() для парсинга JSON
-            console.log(responseText);
-            document.getElementById('out').innerHTML = JSON.stringify(responseText, null, 2); // Отображение данных
-        } else {
-            console.error('Ошибка при получении данных:', response.status);
-        }
-    }
+    input.addEventListener('blur', function() {
+        setTimeout(() => {
+            dt.style.display = 'none';
+        }, 200);
+    });
 
-        getText();
+
 
 
     </script>

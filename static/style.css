@@ -162,14 +162,14 @@ form {
 }
 
 .d1 button:before {
-  content: "\f002";
+  content: "\27A4";
   font-family: FontAwesome;
   font-size: 16px;
   color: #F9F0DA;
 
 }
 
-/* Подсказки поиска  */
+/* Подсказки поиска
 .search-container {
     overflow: hidden auto;
     position: absolute;
@@ -177,4 +177,31 @@ form {
     z-index: 100;
     min-width: 480px;
 
+}*/
+
+/* Подсказки поиска  */
+option {
+    width: 95%;
+    height: 20px;
+    outline: 1px solid black;
 }
+
+ #suggest {
+        display:none;
+        background-color:  #f2e9d0;
+        width: 95.5%;
+
+
+        position: absolute;
+        display: none;
+    }
+    #suggest p{
+        margin:0;
+        padding: 0.5em;
+        text-align: left;
+    }
+
+    #suggest p:hover{
+        background-color: white;
+        cursor: grab;
+    }
