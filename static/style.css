@@ -169,15 +169,6 @@ form {
 
 }
 
-/* Подсказки поиска
-.search-container {
-    overflow: hidden auto;
-    position: absolute;
-    top: 100%;
-    z-index: 100;
-    min-width: 480px;
-
-}*/
 
 /* Подсказки поиска  */
 option {

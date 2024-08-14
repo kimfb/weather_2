@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, g, flash, abort, redirect, url_for, make_response
+from flask import Flask, render_template, request, jsonify
 from MeteoData import MeteoData, MeteoOutput
 
 DEBUG = True
@@ -13,10 +13,8 @@ format_output = MeteoOutput()
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    global meteo, format_output
     if request.method == "POST":
-        if request.form['location']:
-            meteo = MeteoData(request.form['location'])
+        meteo.update_req(request.form['location'])
 
     meteo_data = meteo.get_meteo_data()
     return render_template('index.html',
@@ -29,11 +27,6 @@ def index():
 def search():
     hints = meteo.get_hints(request.json['data'])
     return jsonify(hints)
-
-
-@app.route('/test_input')
-def test_input():
-    return render_template('test_input.html')
 
 
 if __name__ == "__main__":
