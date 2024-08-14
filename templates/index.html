@@ -8,6 +8,7 @@
 
 </head>
 <body>
+    <!-- Поле ввода -->
     <div class="d1">
       <form action="{{url_for('index')}}" method="post" class="form-search">
           <input type="text" placeholder="Искать здесь..." name="location" autocomplete="off" required>
@@ -17,8 +18,10 @@
       </form>
     </div>
 
+    <!--Город, Страна-->
     <h1>{{loc[1]}}, {{loc[0]}}</h1>
 
+    <!--Верхние блоки с короткой информацией о погоде сейчас, сегодня, завтра-->
     <div class="container">
         <div class="addit-cards">
             <div class="w_now">
@@ -57,6 +60,8 @@
                 </div>
             </div>
         </div>
+
+        <!--Основной блок с подробной информацией о текущей погоде-->
         <div class="main-card">
             <h2>Сейчас</h2>
             <h2 class="temperature">{{format_output.convert_temperature(meteo_data["current"]['temperature_2m']) }}</h2>

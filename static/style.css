@@ -3,6 +3,7 @@ h1, h2, h3, div, p {
 }
 
 /* Общий блок вывода */
+
 .container {
     margin-left: 10vw;
     width: 660px;
@@ -12,12 +13,14 @@ h1, h2, h3, div, p {
     font-family: Arial;
     color: #e6f0f5;
 }
+
 h1 {
     color: #3880b0;
     margin: 3vw 0 1vw 10vw;
    }
 
 /* Блок с погодой сейчас, сегодня, завтра */
+
 .addit-cards {
     width: 100%;
     height:30%;
@@ -50,30 +53,34 @@ h1 {
 .w_left p{
     text-align: left;
 }
+
 .w_right{
     width: 40%;
     align-self: center;
-
 }
+
 .w_right p {
     text-align: right;
     font-size: 0.75em;
-
 }
-    /* Настройка текста внутри левого блока */
+
+/* Настройка текста внутри левого блока */
 
 .w_left p:nth-child(1){
    font-size: 1em;
    margin-bottom: 0.4em;
 }
+
 .w_left p:nth-child(2){
    font-size: 1.4em;
 }
+
 .w_left p:last-child {
     font-size: 0.8em;
 }
 
 /* Основной блок погоды на сегодня */
+
 .main-card {
     padding: 5%;
     display: flex;
@@ -86,6 +93,7 @@ h1 {
 .main-card h2, p{
     text-align: center;
 }
+
 .main-card h2:first-child{
     font-size: 2em;
 }
@@ -100,6 +108,7 @@ h1 {
 }
 
 /* Блок дополнительной информации о погоде  */
+
 .add-info {
     margin-top: 2%;
     padding: 5%;
@@ -108,15 +117,17 @@ h1 {
     border-top: 2px solid white;
 
 }
+
 .add-info span {
     font-size: 2em;
 }
+
 .add-info div{
     flex-grow: 1;
 }
 
-
 /* медиазапросы
+
 @media (min-width: 800px) {
     .container {
         max-width: 600px;
@@ -126,11 +137,13 @@ h1 {
 }*/
 
 /* Поле поиска  */
+
 form {
   position: relative;
   width: 650px;
   margin: 0 auto;
 }
+
 .d1 {background: #009B95;
     width: 650px;
     margin-left: 9vw;
@@ -139,6 +152,7 @@ form {
 .d1 input:focus {
     background-color: #f2e9d0;
 }
+
 .d1 input {
   width: 100%;
   height: 42px;
@@ -149,6 +163,7 @@ form {
   background: #F9F0DA;
   color: #9E9C9C;
 }
+
 .d1 button {
   position: absolute;
   top: 0;
@@ -166,33 +181,31 @@ form {
   font-family: FontAwesome;
   font-size: 16px;
   color: #F9F0DA;
-
 }
 
-
 /* Подсказки поиска  */
+
 option {
     width: 95%;
     height: 20px;
     outline: 1px solid black;
 }
 
- #suggest {
-        display:none;
-        background-color:  #f2e9d0;
-        width: 95.5%;
+#suggest {
+    display:none;
+    background-color:  #f2e9d0;
+    width: 95.5%;
+    position: absolute;
+    display: none;
+}
 
+#suggest p{
+    margin:0;
+    padding: 0.5em;
+    text-align: left;
+}
 
-        position: absolute;
-        display: none;
-    }
-    #suggest p{
-        margin:0;
-        padding: 0.5em;
-        text-align: left;
-    }
-
-    #suggest p:hover{
-        background-color: white;
-        cursor: grab;
-    }
+#suggest p:hover{
+    background-color: white;
+    cursor: grab;
+}
